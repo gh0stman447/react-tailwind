@@ -10,8 +10,4 @@ export const FEATURES = [
   { text: 'Planning', icon: <Planning /> },
 ];
 
-export const COMPANY = [
-  { text: 'History' },
-  { text: 'Our team' },
-  { text: 'Blog' },
-]
+export const COMPANY = [{ text: 'History' }, { text: 'Our team' }, { text: 'Blog' }];

@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { forwardRef, useEffect } from 'react';
 import { NavItem } from '../NavItem';
 import { COMPANY, FEATURES } from '../Header/constants';
 import { MenuItem } from '../MenuItem';
 import { Button } from '../../UI/Button';
 
-export const MobileMenu = ({ isOpen = false }) => {
+export const MobileMenu = forwardRef(({ isOpen = false }, ref) => {
   return (
     <>
       <div
-        className={` absolute top-0 left-0 right-0 bg-almost-black opacity-50 z-10 min-h-[150vh] ${
+        className={`absolute top-0 left-0 right-0 bg-almost-black opacity-50 z-10 min-h-[150vh] ${
           isOpen ? 'flex' : 'hidden'
         }`}
       ></div>
@@ -16,6 +16,7 @@ export const MobileMenu = ({ isOpen = false }) => {
         className={`absolute top-0 right-0 w-1/2 z-20 justify-center bg-white  min-h-[150vh] ${
           isOpen ? 'flex' : 'hidden'
         }`}
+        ref={ref}
       >
         <nav className='my-20 mx-5 space-y-5 text-lg w-full'>
           <NavItem text='Features'>
@@ -38,7 +39,7 @@ export const MobileMenu = ({ isOpen = false }) => {
             <Button variant={'without'} size={'md'}>
               Loggin
             </Button>
-            <Button variant={'outline'} size={'md'}>
+            <Button variant={'outline'} size={'md'} className={'sticky top-0'}>
               Register
             </Button>
           </div>
@@ -46,4 +47,4 @@ export const MobileMenu = ({ isOpen = false }) => {
       </div>
     </>
   );
-};
+});

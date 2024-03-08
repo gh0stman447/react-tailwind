@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { NavItem } from '../NavItem';
 
 import { ReactComponent as LogoIcon } from '../../images/logo.svg';
@@ -11,6 +11,21 @@ import { MobileMenu } from '../MobileMenu';
 
 export const Header = () => {
   const [isModalOpen, SetIsModalOpen] = useState(false);
+  const modalRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        SetIsModalOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalRef]);
+
   return (
     <header className='flex py-3 items-center'>
       <LogoIcon />
@@ -38,7 +53,7 @@ export const Header = () => {
       >
         {!isModalOpen ? <MenuIcon /> : <MenuCloseIcon />}
       </div>
-      <MobileMenu isOpen={isModalOpen} />
+      <MobileMenu isOpen={isModalOpen} ref={modalRef} />
     </header>
   );
 };
